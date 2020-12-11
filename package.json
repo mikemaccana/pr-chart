@@ -1,0 +1,37 @@
+{
+  "name": "arc-example-ts",
+  "version": "1.0.0",
+  "arc": {
+    "app": "tsapp",
+    "description": "Example typescript arc app",
+    "http": {
+      "/": {
+        "method": "get",
+        "src": "dist/http/get-index"
+      },
+      "/*": {
+        "method": "get",
+        "src": "dist/http/get-catchall"
+      }
+    },
+    "static": {
+      "fingerprint": true
+    }
+  },
+  "scripts": {
+    "build": "tsc -w",
+    "sandbox": "arc sandbox",
+    "test": "jest",
+    "start": "run-p build sandbox",
+    "deploy": "npm run build && npx arc deploy"
+  },
+  "dependencies": {
+    "@architect/architect": "^8.3.7",
+    "npm-run-all": "^4.1.5"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.2"
+  }
+}
