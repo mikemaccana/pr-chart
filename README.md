@@ -1,11 +1,10 @@
-# TypeScript with Architect
+# Pull Request Charts
 
- - `src`contains HTML versions of each lambda
- - Types are provided for `Request` and `Response` objects
- - The app will watch and compile TypeScript to `dist` as it's saved
- - Arc uses the `dist` directory
- - This app uses `arc` key in `package.json` to configure Architect
- - Tests use `ts-jest` 
+Using AWS Cloudformation and Lamba (via Arc serverless) and Svelte.
+## TODO
+
+ - Pad empty months
+ - Pagination (though the repo has far less commits than a single page)
 
 ## Build
 
