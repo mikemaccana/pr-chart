@@ -3,4 +3,7 @@ sam.yaml
 package-lock.json
 node_modules
 dist
+public/build
 src/**/*/*.js
+src/shared/static.json
+public/static.json

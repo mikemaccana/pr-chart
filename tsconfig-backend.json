@@ -5,9 +5,13 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "lib": ["es2019"]
+    "lib": ["es2019"],    
+    "types": ["jest"],
   },
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+    "public/*",
+    "src/frontend/*"
+  ],
+  "include": ["src/**/*"]
 }

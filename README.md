@@ -1,6 +1,13 @@
 # Pull Request Charts
 
 Using AWS Cloudformation and Lamba (via Arc serverless) and Svelte.
+
+ - Lambdas are defined under `arc` in `package.json`
+ - Backend code in under `src/http`
+ - Frontend code in under `src/frontend`
+ - `public` dir is mapped to`static` in each lambda.
+ - Livereload is enabled during development
+
 ## TODO
 
  - Pad empty months
