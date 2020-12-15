@@ -2,6 +2,7 @@ import { Request, Response } from "../../shared/architect-types";
 import { STATUSES, CONTENT_TYPES, stringify, log } from "../../shared/utils";
 
 const STATIC_DIR = "/_static";
+const TITLE = "PR SUMMARY";
 
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -9,13 +10,15 @@ const html = `<!DOCTYPE html>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>PR summary</title>
+	<title>${TITLE}</title>
 
 	<link rel='icon' type='image/png' href='${STATIC_DIR}/images/favicon.png'>
 	<link rel='stylesheet' href='${STATIC_DIR}/css/global.css'>
   <link rel='stylesheet' href='${STATIC_DIR}/build/bundle.css'>
   
   <script>
+    // Additional concatenation needed to stop browser from seeing the /script
+    // and closing the tag early!
     document.write('<script src="http://' + location.hostname +
   ':35729/livereload.js?snipver=1"></' + 'script>')
   </script> 
