@@ -1,3 +1,7 @@
+div {
+	display: grid;
+}
+
 html, body {
 	position: relative;
 	width: 100%;

@@ -16,7 +16,6 @@ const log = console.log.bind(console);
 const app = new App({
   target: document.body,
   props: {
-    name: "mike",
     datasets: [
       {
         name: "Dataset 1",

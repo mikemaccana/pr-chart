@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type ObjectLiteral from "./object-literal"
-	export let name: string;
 	export let datasets: ObjectLiteral[];
+	import Total from './Total.svelte';
 	import Chart from 'svelte-frappe-charts';
 
   const data = {
@@ -11,34 +11,34 @@
 			stacked: 1    // default 0, i.e. adjacent
 		}
 	}
+
+	enum colors {
+		brown = 'E8AA00',
+		green = '3BFF00'
+	}
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<div class="key">
+		<Total color="{colors.brown}" name="PRs opened" count="12,123"/>
+		<Total color="{colors.green}" name="PRs closed" count="12,123"/>
+	</div>
 
 	<!-- Compiler produces odd warning here: https://github.com/sveltejs/language-tools/issues/718 -->
-	<Chart data={data} type="axis-mixed" />
+	<Chart {data} type="axis-mixed" />
 </main>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 200px auto;
+		max-width: 1000px;
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	.key {
+		width: 200px;
+		height: 100px;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+
 </style>
