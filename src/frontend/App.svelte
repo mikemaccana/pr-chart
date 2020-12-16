@@ -8,7 +8,12 @@
 	const log = console.log.bind(console);
 
 	let labels: string[]
-	let createdValues: string[] 
+	let createdValues: number[] 
+
+	let totalOpened: number;
+	let totalClosed: number;
+
+	let isComplete = false;
 
 	(async function () {
 		let response = await http.get("/api/v1/pull-request-summary");
@@ -21,6 +26,10 @@
 		createdValues = Object.values(prData.created);
 		log(Object.keys(prData.created));
 		log(Object.values(prData.created));
+
+		totalOpened = createdValues.reduce(function(a: number, b: number): number {return a+b;})
+		totalClosed = createdValues.reduce(function(a: number, b: number): number {return a+b;})
+		isComplete = true
 	})();
 
   const data = {
@@ -29,8 +38,7 @@
     datasets: [
       {
         name: "Created",
-        // values: createdValues,
-        values: [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 2, 2],
+        values: createdValues,
         chartType: "bar",
 			},
 			{
@@ -56,20 +64,27 @@
 	let colors = [`#${palette.brown}`, `#${palette.green}`]
 
 	let barOptions = {
-		stacked: 1    // default 0, i.e. adjacent
+		stacked: 1 
 	}
 
 </script>
 
 <main>
-	<div class="key">
-		<Total color="{palette.brown}" name="PRs opened" count="12,123"/>
-		<Total color="{palette.green}" name="PRs closed" count="12,123"/>
-	</div>
+	{#if isComplete } 
+		<div class="key">
+			<Total color="{palette.brown}" name="PRs opened" count="{String(totalOpened)}"/>
+			<Total color="{palette.green}" name="PRs closed" count="{String(totalClosed)}"/>
+		</div>
 
-	<!-- Compiler produces odd warning here: https://github.com/sveltejs/language-tools/issues/718 -->
-	<!-- See demo at https://codesandbox.io/s/frappe-charts-demo-viqud?from-embed=&file=/src/index.js for badly named 'data' variable -->
-	<Chart {data} type="axis-mixed" {colors} {barOptions}/>
+		<!-- Compiler produces odd warning here: https://github.com/sveltejs/language-tools/issues/718 -->
+		<!-- See demo at https://codesandbox.io/s/frappe-charts-demo-viqud?from-embed=&file=/src/index.js for badly named 'data' variable -->
+		<Chart {data} type="axis-mixed" {colors} {barOptions}/>
+	{:else}
+
+		Waiting
+	
+	{/if}
+
 </main>
 
 <style>
