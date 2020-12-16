@@ -9,6 +9,7 @@
 
 	let labels: string[]
 	let createdValues: number[] 
+	let closedValues: number[] 
 
 	let totalOpened: number;
 	let totalClosed: number;
@@ -24,11 +25,9 @@
 
 		labels = Object.keys(prData.created);
 		createdValues = Object.values(prData.created);
-		log(Object.keys(prData.created));
-		log(Object.values(prData.created));
-
+		closedValues = Object.values(prData.closed);
 		totalOpened = createdValues.reduce(function(a: number, b: number): number {return a+b;})
-		totalClosed = createdValues.reduce(function(a: number, b: number): number {return a+b;})
+		totalClosed = closedValues.reduce(function(a: number, b: number): number {return a+b;})
 		isComplete = true
 	})();
 
@@ -42,16 +41,11 @@
         chartType: "bar",
 			},
 			{
-        name: "Updated",
+        name: "Closed",
         // values: createdValues,
         values: [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 2, 2],
         chartType: "bar",
       },
-      // {
-      //   name: "Dataset 2",
-      //   values: [30, 50, -10, 15, 18, 32, 27, 14],
-      //   chartType: "bar",
-      // },
     ],
 		
 	}

@@ -33,7 +33,7 @@ describe(`GithubClient`, () => {
       "202009": 1,
       "202011": 1,
     });
-    expect(monthlySum.updated).toEqual({});
+    expect(monthlySum.closed).toEqual({});
   });
 
   it(`Pads missing data`, async () => {

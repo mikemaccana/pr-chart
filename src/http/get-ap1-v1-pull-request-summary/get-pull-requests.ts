@@ -56,7 +56,7 @@ export function convertPullRequestsToMonthlySums(
 ) {
   // month as key, sum as data
   const CREATED_PR_SUMS = {};
-  const UPDATED_PR_SUMS = {};
+  const CLOSED_PR_SUMS = {};
   rawPullRequests.forEach((rawPullRequest) => {
     const createdAtRaw = rawPullRequest.created_at;
     if (createdAtRaw) {
@@ -67,12 +67,12 @@ export function convertPullRequestsToMonthlySums(
     const closedAtRaw = rawPullRequest.closed_at;
     if (closedAtRaw) {
       const monthAndYear = dateStringToMonth(closedAtRaw);
-      addOrIncrement(UPDATED_PR_SUMS, monthAndYear);
+      addOrIncrement(CLOSED_PR_SUMS, monthAndYear);
     }
   });
 
   return {
     created: CREATED_PR_SUMS,
-    updated: UPDATED_PR_SUMS,
+    closed: CLOSED_PR_SUMS,
   };
 }

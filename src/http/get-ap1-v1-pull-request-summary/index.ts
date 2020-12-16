@@ -17,7 +17,7 @@ export async function handler(request: Request): Promise<Response> {
   const response = await githubClient.getPullRequests();
   const monthlySums = convertPullRequestsToMonthlySums(response.data);
   monthlySums.created = padMissingMonths(monthlySums.created);
-  monthlySums.updated = padMissingMonths(monthlySums.updated);
+  monthlySums.closed = padMissingMonths(monthlySums.closed);
   return {
     statusCode: STATUSES.OK,
     headers: {
