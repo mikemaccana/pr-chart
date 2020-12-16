@@ -2,10 +2,14 @@
 	import type ObjectLiteral from "./object-literal"
 	import Total from './Total.svelte';
 	import Chart from 'svelte-frappe-charts';
-
 	import { http } from "./modern-http";
 
 	const log = console.log.bind(console);
+
+	enum palette {
+		brown = 'E8AA00',
+		green = '3BFF00'
+	}
 
 	let labels: string[]
 	let createdValues: number[] 
@@ -50,10 +54,7 @@
 		
 	}
 
-	enum palette {
-		brown = 'E8AA00',
-		green = '3BFF00'
-	}
+	
 
 	let colors = [`#${palette.brown}`, `#${palette.green}`]
 
@@ -75,7 +76,7 @@
 		<Chart {data} type="axis-mixed" {colors} {barOptions}/>
 	{:else}
 
-		Waiting
+		<p>Please wait...</p>
 	
 	{/if}
 
@@ -84,8 +85,16 @@
 <style>
 	main {
 		display: grid;
+		width: 100vw;
+		height: -webkit-fill-available;
 		grid-template-columns: 200px auto;
 		max-width: 1000px;
+		align-content: center;
+	}
+
+	p {
+		text-align: center;
+		grid-area: 1 / 1 / 2 / 3;
 	}
 
 	.key {
