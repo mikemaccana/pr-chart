@@ -2,7 +2,7 @@
 
 Using AWS Serverless Application Model, Svelte and TypeScript.
 
-Code uses Arc serverless conventions:
+Code uses [Arc Serverless](https://arc.codes) conventions:
 
 Layout:
 
