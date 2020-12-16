@@ -1,21 +1,12 @@
 <script lang="ts">
+	import type ObjectLiteral from "./object-literal"
 	export let name: string;
+	export let datasets: ObjectLiteral[];
 	import Chart from 'svelte-frappe-charts';
 
   const data = {
     labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    datasets: [
-      {
-        name: "Dataset 1",
-        values: [18, 40, 30, 35, 8, 52, 17, -4],
-        chartType: 'bar'
-      },
-      {
-        name: "Dataset 2",
-        values: [30, 50, -10, 15, 18, 32, 27, 14],
-        chartType: 'bar'
-      }
-		],
+    datasets,
 		barOptions: {
 			stacked: 1    // default 0, i.e. adjacent
 		}
