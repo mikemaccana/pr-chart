@@ -1,34 +1,10 @@
 import { Request, Response } from "../../shared/architect-types";
 import { STATUSES, CONTENT_TYPES, stringify, log } from "../../shared/utils";
+import { layoutPage } from "../../views/page-layout";
 
-const STATIC_DIR = "/_static";
-const TITLE = "PR SUMMARY";
+const TITLE = "PR Summary";
 
-const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
-
-	<title>${TITLE}</title>
-
-	<link rel='icon' type='image/png' href='${STATIC_DIR}/images/favicon.png'>
-	<link rel='stylesheet' href='${STATIC_DIR}/css/global.css'>
-  <link rel='stylesheet' href='${STATIC_DIR}/build/bundle.css'>
-  
-  <script>
-    // Additional concatenation needed to stop browser from seeing the /script
-    // and closing the tag early!
-    document.write('<script src="http://' + location.hostname +
-  ':35729/livereload.js?snipver=1"></' + 'script>')
-  </script> 
-
-	<script defer src='${STATIC_DIR}/build/bundle.js'></script>
-</head>
-
-<body>
-</body>
-</html>`;
+const html = layoutPage(TITLE);
 
 export async function handler(request: Request): Promise<Response> {
   return {
