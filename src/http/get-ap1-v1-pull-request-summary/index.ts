@@ -10,12 +10,16 @@ import { config as dotEnvConfig } from "dotenv";
 
 dotEnvConfig();
 
-const auth = process.env.GITHUB_AUTH;
+const githubAuthToken = process.env.GITHUB_AUTH_TOKEN;
 
 export async function handler(request: Request): Promise<Response> {
-  const githubClient = new GithubClient("downshift-js", "downshift", auth);
-  const response = await githubClient.getPullRequests();
-  const monthlySums = convertPullRequestsToMonthlySums(response.data);
+  const githubClient = new GithubClient(
+    "downshift-js",
+    "downshift",
+    githubAuthToken
+  );
+  const pullRequests = await githubClient.getPullRequests();
+  const monthlySums = convertPullRequestsToMonthlySums(pullRequests);
   monthlySums.created = padMissingMonths(monthlySums.created);
   monthlySums.closed = padMissingMonths(monthlySums.closed);
   return {

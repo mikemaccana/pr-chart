@@ -1,4 +1,4 @@
-import { log, STATUSES } from "../../../shared/utils";
+import { log, STATUSES, SECONDS } from "../../../shared/utils";
 import {
   GithubClient,
   convertPullRequestsToMonthlySums,
@@ -10,18 +10,31 @@ import { config as dotEnvConfig } from "dotenv";
 
 dotEnvConfig();
 
-const githubAuth = process.env.GITHUB_AUTH;
+const githubAuthToken = process.env.GITHUB_AUTH;
 
 describe(`GithubClient`, () => {
-  let githubClient: GithubClient;
-  beforeAll(async () => {
-    githubClient = new GithubClient("downshift-js", "downshift", githubAuth);
+  it(`Gets a list of PRs`, async () => {
+    const githubClient = new GithubClient(
+      "downshift-js",
+      "downshift",
+      githubAuthToken
+    );
+    const pullRequests = await githubClient.getPullRequests();
+    const aReasonbleAmountofRequestsForAnInactiveProject = 2;
+    expect(pullRequests.length).toBeGreaterThanOrEqual(
+      aReasonbleAmountofRequestsForAnInactiveProject
+    );
   });
 
-  it(`Gets a list of PRs`, async () => {
-    const response = await githubClient.getPullRequests();
-    expect(response.status).toEqual(STATUSES.OK);
-    expect(response.data).toHaveProperty("length");
+  it(`Gets a list of PRs for a large project requiring pagination`, async () => {
+    // This is a bit slower due to concatenation
+    jest.setTimeout(20 * SECONDS);
+    const githubClient = new GithubClient("nodejs", "node", githubAuthToken);
+    const pullRequests = await githubClient.getPullRequests();
+    const aReasonbleAmountofRequestsForABusyProject = 150;
+    expect(pullRequests.length).toBeGreaterThanOrEqual(
+      aReasonbleAmountofRequestsForABusyProject
+    );
   });
 
   it(`Filters PRs`, async () => {
@@ -33,7 +46,12 @@ describe(`GithubClient`, () => {
       "202009": 1,
       "202011": 1,
     });
-    expect(monthlySum.closed).toEqual({});
+    expect(monthlySum.closed).toEqual({
+      "202006": 2,
+      "202008": 1,
+      "202009": 1,
+      "202012": 1,
+    });
   });
 
   it(`Pads missing data`, async () => {

@@ -1,5 +1,7 @@
 import { STATUS_CODES } from "http";
 
+export const SECONDS = 1000;
+
 export const STATUSES = Object.fromEntries(
   Object.entries(STATUS_CODES).map((entry) => [entry[1], Number(entry[0])])
 );
