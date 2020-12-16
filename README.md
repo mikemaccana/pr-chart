@@ -1,23 +1,18 @@
 # Pull Request Charts
 
-Using AWS Cloudformation and Lamba (via Arc serverless) and Svelte.
+Using AWS Serverless Application Model, Svelte and TypeScript.
+
+Code uses Arc serverless conventions:
 
  - Lambdas are defined under `arc` in `package.json`
- - Backend code in under `src/http`
- - Frontend code in under `src/frontend`
- - `public` dir is mapped to`static` in each lambda.
- - Livereload is enabled during development
-
+ - Lambda code is under `src/http`. Shared code is `src/shared` (all lamdas) and `/src/views` (`GET` requests only)
+ - Frontend code is under `src/frontend`
+ - Config is under `.env` (not commited). 
+ - `public` dir is mapped to `static` in each lambda.
 ## TODO
 
- - Pad empty months
+ - Minor visual tweaks
  - Pagination (though the repo has far less commits than a single page)
-
-## Build
-
-```bash
-npm run build
-```
 
 ## Test
 
@@ -25,7 +20,12 @@ npm run build
 npm test
 ```
 
-## Run locally:
+## Run in local Sandbox
+
+The app needs a GitHub auth token specific to your account.
+
+ - Copy `.env.example` to `.env`
+ - [Get your own GitHib auth token](https://github.com/settings/tokens/new) and add the token to `.env`.
 
 ```bash
 npm start

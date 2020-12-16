@@ -7,3 +7,4 @@ public/build
 src/**/*/*.js
 src/shared/static.json
 public/static.json
+.env
